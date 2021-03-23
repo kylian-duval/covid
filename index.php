@@ -29,7 +29,7 @@
 
     if (isset($_POST["co"])) {
 
-        $vérifNam = $PDO->prepare("SELECT * FROM `user` WHERE `nom`= ? AND `mdp`= ?"); //vérification si le nom d'utilisateur et disponible
+        $vérifNam = $PDO->prepare("SELECT * FROM `user` WHERE `nom`= ? AND `mdp`= ?"); //vérification si le nom d'utilisateur et le mdp rentrer par le user
         $vérifNam->execute(array($_POST['user'], $_POST['mdp']));
         $userExist = $vérifNam->rowCount();
         if ($userExist == 1) {
