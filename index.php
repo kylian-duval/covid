@@ -2,7 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+require "user.php";
 $PDO = new PDO('mysql:host=mysql-kylian-duval.alwaysdata.net; dbname=kylian-duval_virus; charset=utf8', '223354', 'admin123456789.');
+$jouer = new user($PDO)
 ?>
 
 <head>
@@ -13,15 +15,7 @@ $PDO = new PDO('mysql:host=mysql-kylian-duval.alwaysdata.net; dbname=kylian-duva
 </head>
 <?php if (isset($_POST["co"])) {
 
-    $vérifNam = $PDO->prepare("SELECT * FROM `user` WHERE `nom`= ? AND `mdp`= ?"); //vérification si le nom d'utilisateur et le mdp rentrer par le user
-    $vérifNam->execute(array($_POST['user'], $_POST['mdp']));
-    $userExist = $vérifNam->rowCount();
-    if ($userExist == 1) {
-        echo "vous etre connecter";
-        $_SESSION['id'] = true;
-    } else {
-        echo "tu connais pas des identifient ";
-    }
+    
 }
 
 
