@@ -3,8 +3,10 @@
 <?php
 session_start();
 require "user.php";
+require "personnage.php";
 $PDO = new PDO('mysql:host=mysql-kylian-duval.alwaysdata.net; dbname=kylian-duval_virus; charset=utf8', '223354', 'admin123456789.');
-$jouer = new user($PDO)
+$jouer = new user($PDO);
+$perso = new personnage($PDO);
 ?>
 
 <head>
@@ -15,7 +17,7 @@ $jouer = new user($PDO)
 </head>
 <?php if (isset($_POST["co"])) {
 
-    
+    $jouer->connection($_POST['user'], $_POST['mdp']);
 }
 
 
@@ -27,6 +29,15 @@ $jouer = new user($PDO)
     echo '<form action="" method="post">';
     if (isset($_SESSION['id']) == true) { ?>
         <input type="submit" value="déco" name="deco">
+        <?php 
+            $perso->getChoixPersonnage();
+            if(!$perso->getId()==0){
+                $jouer->setPersonnage($perso);
+            }
+        ?>
+        
+
+
     <?php } else { ?>
 
 
