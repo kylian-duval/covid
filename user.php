@@ -1,7 +1,6 @@
 <?php
 class user
 {
-
     private $_Nom;
     private $_PDO;
     private $_Id;
@@ -37,11 +36,11 @@ class user
     }
 
     public function setUserById($id){
-        $Result = $this->_bdd->query("SELECT * FROM `User` WHERE `id`='".$id."' ");
+        $Result = $this->_PDO->query("SELECT * FROM `User` WHERE `id`='".$id."' ");
         if($tab = $Result->fetch()){ 
             $this->setUser($tab["id"],$tab["login"],$tab["mdp"],$tab["prenom"]);
             //chercher son personnage
-            $personnage = new Personnage($this->_bdd);
+            $personnage = new Personnage($this->_PDO);
             $personnage->setPersonnageById($tab["idPersonnage"]);
             $this->_MonPersonnage = $personnage;
         }
@@ -51,7 +50,7 @@ class user
         $this->_MonPersonnage = $Perso;
         //je mémorise en base l'association du personnage dans user
         $req ="UPDATE `user` SET `id_personnage`='".$Perso->getID()."' WHERE  `id` = '".$this->_Id."'";
-        $Result = $this->_bdd->query($req);
+        $Result = $this->_PDO->query($req);
     }
 
     public function getPrenom(){

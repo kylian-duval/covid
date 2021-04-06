@@ -2,10 +2,11 @@
 class personnage
 {
     //priver :
-    private $_Nom;
-    private $_Vie;
-    private $_degat;
-    private $_PDO;
+    protected $_id;
+    protected $_Nom;
+    protected $_Vie;
+    protected $_degat;
+    protected $_PDO;
     //public:
 
     public function __construct($PDO)
